@@ -1,24 +1,65 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column    | Type   | Options                   |
+| --------- | ------ | ------------------------- |
+| nickname  | string | null: false               |
+| email     | string | null: false, unique: true |
+| password  | string | null: false               |
+| name      | string | null: false               |
+| kana_name | string | null: false               |
+| birthday  | date   | null: false               |
 
-* Ruby version
+### Association
 
-* System dependencies
+ - has_many :items
+ - has_many :sold_items
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+| Column    | Type    | Options                        |
+| --------- | ------- | ------------------------------ |
+| name      | string  | null: false                    |
+| text      | string  | null: false                    |
+| category  | string  | null: false                    |
+| condition | string  | null: false                    |
+| charge    | string  | null: false                    |
+| area      | string  | null: false                    |
+| days      | string  | null: false                    |
+| price     | integer | null: false                    |
+| user_id   | integer | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :sold_item
 
-* Services (job queues, cache servers, search engines, etc.)
+## sold_items テーブル
 
-* Deployment instructions
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user_id | references | null: false, foreign_key: true |
+| item_id | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping
+
+## shippingsテーブル
+
+| Column       | Type    | Options                        |
+| ------------ | ------- | ------------------------------ |
+| postal       | string  | null: false                    |
+| prefecture   | string  | null: false                    |
+| city         | string  | null: false                    |
+| address      | string  | null: false                    |
+| building     | string  |                                |
+| phone        | integer | null: false                    |
+| sold_item_id | integer | null: false, foreign_key: true |
+
+### Association
+
+-belongs_to :sold_item
