@@ -1,13 +1,14 @@
 class Item < ApplicationRecord
 
   belongs_to :user
+  has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :status
   belongs_to :charge
   belongs_to :area
-  belongs_to :days
+  belongs_to :send
 
 
   with_options presence: true do
@@ -21,7 +22,7 @@ class Item < ApplicationRecord
     validates :status_id
     validates :charge_id
     validates :area_id
-    validates :days_id
+    validates :send_id
   end
 
   validates :user, presence: true
