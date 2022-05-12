@@ -8,7 +8,7 @@ class Item < ApplicationRecord
   belongs_to :status
   belongs_to :charge
   belongs_to :area
-  belongs_to :send
+  belongs_to :delivery
 
 
   with_options presence: true do
@@ -17,12 +17,12 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  with_options numericality: { other_than: 1 } do
+  with_options presence: true, numericality: { other_than: 1 } do
     validates :category_id
     validates :status_id
     validates :charge_id
     validates :area_id
-    validates :send_id
+    validates :delivery_id
   end
 
   validates :user, presence: true
