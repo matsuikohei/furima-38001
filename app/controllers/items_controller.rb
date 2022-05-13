@@ -33,8 +33,9 @@ class ItemsController < ApplicationController
       redirect_to item_path(@item)
     else
       render :edit
-    end    
+    end
   end
+
   private
 
   def item_parameters
@@ -45,9 +46,6 @@ class ItemsController < ApplicationController
   def move_to_index
     item = Item.find(params[:id])
     user_id = item.user_id
-    unless current_user.id == user_id
-      redirect_to action: :index
-    end
+    redirect_to action: :index unless current_user.id == user_id
   end
-
 end
