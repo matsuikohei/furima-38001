@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   belongs_to :user
   has_one_attached :image
 
@@ -9,7 +8,6 @@ class Item < ApplicationRecord
   belongs_to :charge
   belongs_to :area
   belongs_to :delivery
-
 
   with_options presence: true do
     validates :name
@@ -27,5 +25,4 @@ class Item < ApplicationRecord
 
   validates :user, presence: true
   validates :price, presence: true, format: { with: /3[0-9]|[3-9][0-9]{2,6}/i }
-
 end

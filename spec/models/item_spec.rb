@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-
   before do
     @item = FactoryBot.build(:item)
   end
@@ -39,19 +38,19 @@ RSpec.describe Item, type: :model do
       it '商品説明が空では登録できない' do
         @item.text = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Text can't be blank")        
+        expect(@item.errors.full_messages).to include("Text can't be blank")
       end
 
       it 'カテゴリーが空では登録できない' do
         @item.category_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")        
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
 
       it '商品の状態が空では登録できない' do
         @item.status_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank")        
+        expect(@item.errors.full_messages).to include("Status can't be blank")
       end
 
       it '配送料の負担が空では登録できない' do
@@ -63,45 +62,44 @@ RSpec.describe Item, type: :model do
       it '発送元の地域が空では登録できない' do
         @item.area_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Area can't be blank")        
+        expect(@item.errors.full_messages).to include("Area can't be blank")
       end
 
       it '発送までの日数が空では登録できない' do
         @item.delivery_id = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery can't be blank")        
+        expect(@item.errors.full_messages).to include("Delivery can't be blank")
       end
 
       it '価格が空では登録できない' do
         @item.price = ''
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")        
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
       it '価格が¥299では登録できない' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid")        
+        expect(@item.errors.full_messages).to include('Price is invalid')
       end
 
       it '価格が¥10,000,000では登録できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid")        
+        expect(@item.errors.full_messages).to include('Price is invalid')
       end
 
       it '価格が全角数字では登録できない' do
         @item.price = '２０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid")        
+        expect(@item.errors.full_messages).to include('Price is invalid')
       end
 
       it '価格が半角英字では登録できない' do
         @item.price = 'abcd'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is invalid")        
+        expect(@item.errors.full_messages).to include('Price is invalid')
       end
-
     end
   end
 end
