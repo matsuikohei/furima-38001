@@ -7,7 +7,13 @@ class ItemsController < ApplicationController
   end
 
   def create
-    Item.create(item_parameters)
+    item = Item.new(item_parameters)
+    if item.save 
+      redirect_to root_path
+    else
+      @item = Item.new(item_parameters)
+      render :new
+    end
   end
 
   private
