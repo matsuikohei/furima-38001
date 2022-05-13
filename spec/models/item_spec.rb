@@ -50,7 +50,7 @@ RSpec.describe Item, type: :model do
       it 'カテゴリーに「---」が選択されている場合は登録できない' do
         @item.category_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category must be other than 1")
+        expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
 
       it '商品の状態が空では登録できない' do
@@ -62,7 +62,7 @@ RSpec.describe Item, type: :model do
       it '商品の状態に「---」が選択されている場合は登録できない' do
         @item.status_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status must be other than 1")
+        expect(@item.errors.full_messages).to include('Status must be other than 1')
       end
 
       it '配送料の負担が空では登録できない' do
@@ -74,7 +74,7 @@ RSpec.describe Item, type: :model do
       it '配送料の負担に「---」が選択されている場合は登録できない' do
         @item.charge_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Charge must be other than 1")
+        expect(@item.errors.full_messages).to include('Charge must be other than 1')
       end
 
       it '発送元の地域が空では登録できない' do
@@ -86,7 +86,7 @@ RSpec.describe Item, type: :model do
       it '発送元の地域に「---」が選択されている場合は登録できない' do
         @item.area_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Area must be other than 1")
+        expect(@item.errors.full_messages).to include('Area must be other than 1')
       end
 
       it '発送までの日数が空では登録できない' do
@@ -98,7 +98,7 @@ RSpec.describe Item, type: :model do
       it '発送までの日数に「---」が選択されている場合は登録できない' do
         @item.delivery_id = '1'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery must be other than 1")
+        expect(@item.errors.full_messages).to include('Delivery must be other than 1')
       end
 
       it '価格が空では登録できない' do
@@ -136,8 +136,6 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
       end
-
-
     end
   end
 end
