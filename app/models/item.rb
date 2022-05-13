@@ -23,6 +23,5 @@ class Item < ApplicationRecord
     validates :delivery_id
   end
 
-  validates :user, presence: true
-  validates :price, presence: true, format: { with: /3[0-9]|[3-9][0-9]{2,6}/i }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
 end
