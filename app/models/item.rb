@@ -14,7 +14,6 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :text
-    validates :price
     validates :image
   end
 
@@ -27,5 +26,6 @@ class Item < ApplicationRecord
   end
 
   validates :user, presence: true
+  validates :price, presence: true, format: { with: /3[0-9]|[3-9][0-9]{2,6}/i }
 
 end
