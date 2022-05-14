@@ -9,6 +9,8 @@ class SoldItemShipping
     validates :phone, format: {with: /[0-9]{10,11}/}
     validates :user_id
     validates :item_id
+    validates :token
+    validates :price
   end
 
   def save
