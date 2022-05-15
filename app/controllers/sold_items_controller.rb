@@ -1,4 +1,7 @@
 class SoldItemsController < ApplicationController
+  before_action :authenticate_user! 
+  before_action :move_to_index
+
   def index
     @item = Item.find(params[:item_id])
     @sold_item_shipping = SoldItemShipping.new
@@ -30,4 +33,16 @@ class SoldItemsController < ApplicationController
       currency: 'jpy'
     )
   end
+
+  def move_to_index
+    item = Item.find(params[:item_id])
+    user_id = item.user_id
+    sold_item = item.sold_item
+    if current_user.id == user_id
+      redirect_to root_path
+    elsif sold_item != nil
+      redirect_to root_path
+    end
+  end
+
 end
