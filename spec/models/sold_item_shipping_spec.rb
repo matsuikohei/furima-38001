@@ -22,6 +22,18 @@ RSpec.describe SoldItemShipping, type: :model do
     end
 
     context 'クレジットカード情報と配送先情報を登録できない' do
+      it 'userが紐付いてないと購入できない' do
+        @sold_item_shipping.user_id = nil
+        @sold_item_shipping.valid?
+        expect(@sold_item_shipping.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'itemが紐付いてないと購入できない' do
+        @sold_item_shipping.item_id = nil
+        @sold_item_shipping.valid?
+        expect(@sold_item_shipping.errors.full_messages).to include("Item can't be blank")
+      end
+
       it 'クレジットカード情報が空では登録できない' do
         @sold_item_shipping.token = ''
         @sold_item_shipping.valid?
@@ -84,6 +96,12 @@ RSpec.describe SoldItemShipping, type: :model do
 
       it '電話番号が9桁の半角数値では登録できない' do
         @sold_item_shipping.phone = '123456789'
+        @sold_item_shipping.valid?
+        expect(@sold_item_shipping.errors.full_messages).to include("Phone is invalid")        
+      end
+
+      it '電話番号が12桁の半角数値では登録できない' do
+        @sold_item_shipping.phone = '123456789012'
         @sold_item_shipping.valid?
         expect(@sold_item_shipping.errors.full_messages).to include("Phone is invalid")        
       end

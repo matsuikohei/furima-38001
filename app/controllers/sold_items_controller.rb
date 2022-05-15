@@ -1,9 +1,9 @@
 class SoldItemsController < ApplicationController
   before_action :authenticate_user! 
   before_action :move_to_index
+  before_action :set_item
 
   def index
-    @item = Item.find(params[:item_id])
     @sold_item_shipping = SoldItemShipping.new
   end
 
@@ -14,7 +14,6 @@ class SoldItemsController < ApplicationController
       @sold_item_shipping.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -28,7 +27,7 @@ class SoldItemsController < ApplicationController
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: sold_item_shipping_parameters[:price],
+      amount: @item.price,
       card: sold_item_shipping_parameters[:token],
       currency: 'jpy'
     )
@@ -43,6 +42,10 @@ class SoldItemsController < ApplicationController
     elsif sold_item != nil
       redirect_to root_path
     end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
 end
