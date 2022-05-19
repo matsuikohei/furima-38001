@@ -73,6 +73,13 @@
 /* /共通 */
 
 /* 商品画像 */
+.preview-image {
+  height: 20vh;
+  width: 20vw;
+  padding: 2vh 0;
+  object-fit: contain;
+}
+
 .img-upload {
   display: flex;
   justify-content: space-between;
